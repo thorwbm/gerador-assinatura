@@ -7,7 +7,7 @@ public class Aplicacao {
 	public static void main(String[] args) {
 		
 		SwingUtilities.invokeLater(() -> {
-			Assinatura assinatura = new Assinatura();
+			Gerador assinatura = new Gerador();
 			
 			assinatura.setVisible(true);
 			
