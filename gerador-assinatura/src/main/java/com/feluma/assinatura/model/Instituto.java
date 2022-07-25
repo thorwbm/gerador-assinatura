@@ -3,10 +3,10 @@ package com.feluma.assinatura.model;
 public enum Instituto {
 
 	CSC("Centro Corporativo", "FELUMA", "www.feluma.org.br"),
-	IPG("Centro Corporativo", "CMMG", "https://pos.cmmg.edu.br/"),
+	IPG("Centro Corporativo", "CMMG", "pos.cmmg.edu.br"),
 	AMBULATORIO("Centro Corporativo", "FELUMA", "www.feluma.org.br"),
-	TEATRO("Teatro Feluma", "TEATRO", "https://teatrofeluma.org.br/"),
-	HUCM("Hospital Universitario Ciencias Medicas", "CMMG", "www.feluma.org.br");
+	TEATRO("Teatro Feluma", "TEATROFELUMA", "teatrofeluma.org.br"),
+	HUCM("Hospital Universitario Ciencias Medicas", "CMMG", "www.hucm.org.br");
 	
 	private String nome;
 	private String logo;

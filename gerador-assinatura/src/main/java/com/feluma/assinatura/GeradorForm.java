@@ -28,8 +28,10 @@ public  abstract class GeradorForm extends JFrame{
 	protected JTextField txtTelefone;
 	
 	protected JLabel lblInstituto;
-	protected JTextField txtInstituto;
 	protected JComboBox<String> cbxInstituto;
+	
+	protected JLabel lblPasta;
+	protected JButton btnPasta;
 	
 	protected JPanel pnlForm;
 	protected JPanel pnlRodape;
@@ -61,7 +63,7 @@ public  abstract class GeradorForm extends JFrame{
 
 	public JPanel getPnlForm() {
 		if(pnlForm == null) {
-			pnlForm = new JPanel(new GridLayout(4,2));
+			pnlForm = new JPanel(new GridLayout(5,2));
 
 			String[] comboMensagens = {"CSC","HUCM","IPG","TEATRO","AMBULATORIO"};
 			lblNome = new JLabel("Nome");
@@ -72,9 +74,14 @@ public  abstract class GeradorForm extends JFrame{
 			
 			lblTelefone = new JLabel("Telefone");
 			txtTelefone = new JTextField(TAMANHO_TXT);
+			txtTelefone.setText("+55 (31) ");
 						
 			lblInstituto = new JLabel("Instituto");
 			cbxInstituto = new JComboBox<String>(comboMensagens);
+			
+			lblPasta = new JLabel("Selecione uma pasta de destino.");
+			btnPasta = new JButton("Arquivo Destino");
+			btnPasta.setBounds(50, 50, 100, 50);
 
 			pnlForm.add(lblNome);
 			pnlForm.add(txtNome);
@@ -87,6 +94,9 @@ public  abstract class GeradorForm extends JFrame{
 
 			pnlForm.add(lblInstituto);
 			pnlForm.add(cbxInstituto);
+			
+			pnlForm.add(btnPasta);
+			pnlForm.add(lblPasta);
 			
 		}
 		return pnlForm;
@@ -110,10 +120,12 @@ public  abstract class GeradorForm extends JFrame{
 	protected abstract void btnGerarClick(ActionEvent evt);
 	protected abstract void btnLimparClick(ActionEvent evt);
 	protected abstract void btnFecharClick(ActionEvent evt);
+	protected abstract void btnPastaClick(ActionEvent evt);
 	
 	private void eventos() {
 		btnGerar.addActionListener(this::btnGerarClick);
 		btnLimpar.addActionListener(this::btnLimparClick);
 		btnFechar.addActionListener(this::btnFecharClick);
+		btnPasta.addActionListener(this::btnPastaClick);
 	}
 }
