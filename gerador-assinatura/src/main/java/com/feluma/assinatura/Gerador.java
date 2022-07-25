@@ -18,7 +18,9 @@ public class Gerador extends GeradorForm {
 	protected void btnGerarClick(ActionEvent evt) {
      
 		GeradorAssinatura assinatura = new GeradorAssinatura();
-		String msg = (String) cbxInstituto.getSelectedItem();
+		String instituto = (String) cbxInstituto.getSelectedItem();
+
+		String posicao = (String) cbxPosicao.getSelectedItem();
 		
 				
 		Pessoa pessoa = new Pessoa();
@@ -27,7 +29,7 @@ public class Gerador extends GeradorForm {
 		pessoa.setTelefone(txtTelefone.getText());
 		pessoa.setFuncao(txtFuncao.getText());
 				
-		if (msg != null &&
+		if (instituto != null &&
 				pessoa.getNome()     != null &&
 				pessoa.getTelefone() != null &&
 				pessoa.getFuncao()   != null &&
@@ -39,26 +41,26 @@ public class Gerador extends GeradorForm {
 				saida = "c:\\temp";
 			}
 					
-			if(msg =="CSC") {
+			if(instituto =="CSC") {
 				pessoa.setInstituto(Instituto.CSC);
 			} 
-	        if (msg == "TEATRO"){
+	        if (instituto == "TEATRO"){
 			    pessoa.setInstituto(Instituto.TEATRO);		    
 			}
 	
-	        if (msg == "IPG"){
+	        if (instituto == "IPG"){
 			    pessoa.setInstituto(Instituto.IPG);		    
 			}
 	
-	        if (msg == "HUCM"){
+	        if (instituto == "HUCM"){
 			    pessoa.setInstituto(Instituto.HUCM);		    
 			}
 	
-	        if (msg == "AMBULATORIO"){
+	        if (instituto == "AMBULATORIO"){
 			    pessoa.setInstituto(Instituto.AMBULATORIO);		    
 			}		
 								
-			assinatura.criarAssinatura(pessoa, saida);
+			assinatura.criarAssinatura(pessoa, saida, posicao);
 		} else {
 			JOptionPane.showMessageDialog(null, "Voce precisa preencher todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
 		}

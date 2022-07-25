@@ -16,12 +16,13 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import com.feluma.assinatura.model.Cor;
 import com.feluma.assinatura.model.Pessoa;
 
 public class GeradorAssinatura {
 
 
-	public void criarAssinatura(Pessoa pessoa, String saida) {		
+	public void criarAssinatura(Pessoa pessoa, String saida, String posicao) {		
 		try {
 			BufferedImage logo = ImageIO.read(new FileInputStream("c:/image/" + pessoa.getInstituto().getLogo() + ".png"));
 			int largura = logo.getWidth();
@@ -32,30 +33,26 @@ public class GeradorAssinatura {
 			Graphics2D graphic = (Graphics2D) assinatura.getGraphics();
 			
 			graphic.drawImage(logo, 0, 0, null);
-	
-
-					
-			Rectangle retangulo = new Rectangle(150, 25, 650,30);		
-			Font fonte = new Font(Font.DIALOG_INPUT, Font.BOLD, 30);
-			graphic.setColor(Color.YELLOW);
-			 centerString(graphic, retangulo, pessoa.getNome(), fonte);		 
-	
-			retangulo = new Rectangle(150, 55, 650,30);		
-			fonte = new Font(Font.DIALOG_INPUT, Font.BOLD, 18);
-			graphic.setColor(Color.YELLOW);
-			centerString(graphic, retangulo, pessoa.getFuncao(), fonte);		
-	
-	
-			retangulo = new Rectangle(150, 95, 650,30);		
-			fonte = new Font(Font.DIALOG_INPUT, Font.BOLD, 24);
-			graphic.setColor(Color.YELLOW);
-			centerString(graphic, retangulo, pessoa.getTelefone(), fonte);
-	
-			retangulo = new Rectangle(150, 150, 650,30);		
-			fonte = new Font(Font.DIALOG_INPUT, Font.BOLD, 18);
-			graphic.setColor(new Color(16776));
-			centerString(graphic, retangulo, pessoa.getInstituto().getSite(), fonte);
 			
+			
+			
+			
+			//Font fonte = new Font(Font.DIALOG_INPUT, Font.BOLD, 30);
+			Font fonte = new Font("Arial", Font.BOLD,30);
+			graphic.setColor(Cor.AZUL.getCor());
+			posicionaString(graphic, pessoa.getNome(), fonte, 150, 25, 650,30, posicao);
+		
+			fonte = new Font("Arial", Font.BOLD, 18);
+			graphic.setColor(Cor.LARANJA.getCor());
+			posicionaString(graphic, pessoa.getFuncao(), fonte, 150, 55, 650,30, posicao);
+			
+			fonte = new Font("Arial", Font.BOLD, 24);
+			graphic.setColor(Cor.PRETO.getCor());
+			posicionaString(graphic,  pessoa.getTelefone(), fonte, 150, 95, 650,30, posicao);
+		
+			fonte = new Font("Arial", Font.BOLD, 18);
+			graphic.setColor(Cor.PRETO.getCor());
+			posicionaString(graphic, pessoa.getInstituto().getSite(), fonte, 150, 150, 650,30, posicao);
 	
 			ImageIO.write(assinatura, "png", new File(saida + "\\assinatura-" + pessoa.getInstituto().name() + "-" + primeiroNome(pessoa.getNome()) + ".png"));
 			
@@ -66,23 +63,9 @@ public class GeradorAssinatura {
 		}
 	}
 	
-	/**
-	 * This method centers a <code>String</code> in 
-	 * a bounding <code>Rectangle</code>.
-	 * @param g - The <code>Graphics</code> instance.
-	 * @param r - The bounding <code>Rectangle</code>.
-	 * @param s - The <code>String</code> to center in the
-	 * bounding rectangle.
-	 * @param font - The display font of the <code>String</code>
-	 * 
-	 * @see java.awt.Graphics
-	 * @see java.awt.Rectangle
-	 * @see java.lang.String
-	 */
 	public void centerString(Graphics2D g, Rectangle r, String s, 
 	        Font font) {
-	    FontRenderContext frc = 
-	            new FontRenderContext(null, true, true);
+	    FontRenderContext frc = new FontRenderContext(null, true, true);
 
 	    Rectangle2D r2D = font.getStringBounds(s, frc);
 	    int rWidth = (int) Math.round(r2D.getWidth());
@@ -109,5 +92,35 @@ public class GeradorAssinatura {
       }
      return retorno; 
 	}
+	
+	public void posicionaString(Graphics2D g, String s,  Font font, int x, int y, int largura, int altura, String posicao) {
+		
+	    FontRenderContext frc =  new FontRenderContext(null, true, true);
+	    Rectangle r = new Rectangle(x, y, largura, altura);
+	    	    
+	    Rectangle2D r2D = font.getStringBounds(s, frc);
+	    int rWidth = (int) Math.round(r2D.getWidth());
+	    int rHeight = (int) Math.round(r2D.getHeight());
+	    int rX = (int) Math.round(r2D.getX());
+	    int rY = (int) Math.round(r2D.getY());
+	    
+	    int a = (r.width);
+		int b = (r.height / 2) - (rHeight / 2) - rY; 
+
+	    if(posicao == "center") {
+		     a = (r.width / 2) - (rWidth / 2) - rX;
+		     b = (r.height / 2) - (rHeight / 2) - rY;
+	    } else if (posicao == "left"){
+	    	 a = (5);
+			 b = (r.height / 2) - (rHeight / 2) - rY; 
+	    } else if (posicao == "right"){
+	    	 a = (r.width) - rWidth - 10;
+			 b = (r.height / 2) - (rHeight / 2) - rY; 
+	    }
+
+	    g.setFont(font);
+	    g.drawString(s, r.x + a, r.y + b);  
+	}
+	
 
 }

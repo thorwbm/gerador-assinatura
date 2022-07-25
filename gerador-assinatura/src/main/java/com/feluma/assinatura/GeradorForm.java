@@ -26,9 +26,12 @@ public  abstract class GeradorForm extends JFrame{
 	
 	protected JLabel lblTelefone;
 	protected JTextField txtTelefone;
-	
+
 	protected JLabel lblInstituto;
 	protected JComboBox<String> cbxInstituto;
+	
+	protected JLabel lblPosicao;
+	protected JComboBox<String> cbxPosicao;
 	
 	protected JLabel lblPasta;
 	protected JButton btnPasta;
@@ -63,9 +66,10 @@ public  abstract class GeradorForm extends JFrame{
 
 	public JPanel getPnlForm() {
 		if(pnlForm == null) {
-			pnlForm = new JPanel(new GridLayout(5,2));
+			pnlForm = new JPanel(new GridLayout(6,2));
 
-			String[] comboMensagens = {"CSC","HUCM","IPG","TEATRO","AMBULATORIO"};
+			String[] comboInstituto = {"CSC","HUCM","IPG","TEATRO","AMBULATORIO"};
+			String[] comboPosicao = {"center","left","right"};
 			lblNome = new JLabel("Nome");
 			txtNome = new JTextField(TAMANHO_TXT);
 			
@@ -75,9 +79,12 @@ public  abstract class GeradorForm extends JFrame{
 			lblTelefone = new JLabel("Telefone");
 			txtTelefone = new JTextField(TAMANHO_TXT);
 			txtTelefone.setText("+55 (31) ");
-						
+
 			lblInstituto = new JLabel("Instituto");
-			cbxInstituto = new JComboBox<String>(comboMensagens);
+			cbxInstituto = new JComboBox<String>(comboInstituto);
+			
+			lblPosicao = new JLabel("Posicao");
+			cbxPosicao = new JComboBox<String>(comboPosicao);
 			
 			lblPasta = new JLabel("Selecione uma pasta de destino.");
 			btnPasta = new JButton("Arquivo Destino");
@@ -91,6 +98,10 @@ public  abstract class GeradorForm extends JFrame{
 			
 			pnlForm.add(lblTelefone);
 			pnlForm.add(txtTelefone);
+
+			pnlForm.add(lblPosicao);
+			pnlForm.add(cbxPosicao);
+
 
 			pnlForm.add(lblInstituto);
 			pnlForm.add(cbxInstituto);
