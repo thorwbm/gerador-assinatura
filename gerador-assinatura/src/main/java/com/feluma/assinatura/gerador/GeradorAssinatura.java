@@ -1,6 +1,5 @@
 package com.feluma.assinatura.gerador;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -22,7 +21,7 @@ import com.feluma.assinatura.model.Pessoa;
 public class GeradorAssinatura {
 
 
-	public void criarAssinatura(Pessoa pessoa, String saida, String posicao) {		
+	public void criarAssinatura(Pessoa pessoa, String saida, String posicao)  {		
 		try {
 			BufferedImage logo = ImageIO.read(new FileInputStream("c:/image/" + pessoa.getInstituto().getLogo() + ".png"));
 			int largura = logo.getWidth();
@@ -53,14 +52,14 @@ public class GeradorAssinatura {
 			fonte = new Font("Arial", Font.BOLD, 18);
 			graphic.setColor(Cor.PRETO.getCor());
 			posicionaString(graphic, pessoa.getInstituto().getSite(), fonte, 150, 150, 650,30, posicao);
-	
+			
 			ImageIO.write(assinatura, "png", new File(saida + "\\assinatura-" + pessoa.getInstituto().name() + "-" + primeiroNome(pessoa.getNome()) + ".png"));
 			
 			JOptionPane.showMessageDialog(null, "Assinatura gerada com sucesso na pasta [" + saida + "] .");
-
-		} catch (IOException e) {
+	
+		}  catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Arquivo corrompido ou inexistente.", "Erro", JOptionPane.ERROR_MESSAGE);
-		}
+		}	
 	}
 	
 	public void centerString(Graphics2D g, Rectangle r, String s, 
